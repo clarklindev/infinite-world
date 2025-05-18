@@ -31,6 +31,19 @@ export default class State
         this.player = new Player()
         this.terrains = new Terrains()
         this.chunks = new Chunks()
+        this.otherPlayers = new Map()
+    }
+
+    updatePlayers(players) {
+        // Clear old players
+        this.otherPlayers.clear()
+
+        // Add all players except self
+        for(const player of players) {
+            if(player.id !== this.player.id) {
+                this.otherPlayers.set(player.id, player)
+            }
+        }
     }
 
     resize()
